@@ -1,14 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import BlogThemes from '../components/BlogThemes.astro';
-import BlogStructure from '../components/BlogStructure.astro';
-import Footer from '../components/Footer.astro';
+title: "Accueil"
+description: "Bienvenue sur mon site"
 ---
+import Layout from '../layouts/Layout.astro';
 
-<Layout title="RafterKode - Tech Explorer & Developer Blog">
-	<Hero />
-	<BlogThemes />
-	<BlogStructure />
-	<Footer />
+<Layout>
+  <main>
+    <h1>Bienvenue !</h1>
+    <p>Ceci est la page d’accueil de votre site construit avec Astro et compatible avec GitHub Pages/Jekyll.</p>
+  </main>
 </Layout>
