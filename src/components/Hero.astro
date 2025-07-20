@@ -1,0 +1,174 @@
+---
+---
+
+<section class="hero section">
+	<div class="container">
+		<div class="hero-content">
+			<!-- Background decoration -->
+			<div class="hero-bg"></div>
+			
+			<!-- Badge -->
+			<div class="badge">
+				<i data-lucide="code-2"></i>
+				<span>Tech Explorer & Developer Blog</span>
+			</div>
+			
+			<!-- Main title -->
+			<h1 class="hero-title gradient-text">RafterKode</h1>
+			
+			<!-- Description -->
+			<p class="hero-description">
+				Exploration approfondie des technologies modernes : DevSecOps, WordPress, JavaScript, SAAS et Intelligence Artificielle. 
+				Des guides pratiques aux retours d'expérience, découvrez les innovations qui façonnent le développement web.
+			</p>
+			
+			<!-- CTA Buttons -->
+			<div class="hero-cta">
+				<a href="#blog-themes" class="btn btn-primary">
+					<i data-lucide="book-open"></i>
+					Découvrir les articles
+				</a>
+				<a href="/blog/devsecops-guide" class="btn btn-secondary">
+					<i data-lucide="shield"></i>
+					DevSecOps Guide
+				</a>
+			</div>
+			
+			<!-- Features -->
+			<div class="hero-features">
+				<div class="feature">
+					<div class="feature-indicator"></div>
+					<span>Guides pratiques</span>
+				</div>
+				<div class="feature">
+					<div class="feature-indicator indicator-blue"></div>
+					<span>Retours d'expérience</span>
+				</div>
+				<div class="feature">
+					<div class="feature-indicator indicator-purple"></div>
+					<span>Innovations tech</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.hero {
+		position: relative;
+		background: var(--gradient-hero);
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		overflow: hidden;
+	}
+
+	.hero-bg {
+		position: absolute;
+		top: 20%;
+		right: 10%;
+		width: 400px;
+		height: 400px;
+		background: var(--gradient-primary);
+		border-radius: 50%;
+		filter: blur(100px);
+		opacity: 0.3;
+		z-index: 0;
+	}
+
+	.hero-content {
+		position: relative;
+		z-index: 1;
+		text-align: center;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.badge {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		background: hsl(var(--card));
+		border: 1px solid hsl(var(--border));
+		border-radius: 2rem;
+		font-size: 0.875rem;
+		margin-bottom: 2rem;
+		backdrop-filter: blur(10px);
+	}
+
+	.hero-title {
+		font-size: clamp(3rem, 8vw, 7rem);
+		font-weight: 700;
+		margin-bottom: 1.5rem;
+		line-height: 1.1;
+	}
+
+	.hero-description {
+		font-size: 1.25rem;
+		color: hsl(var(--foreground) / 0.8);
+		margin-bottom: 3rem;
+		line-height: 1.6;
+	}
+
+	.hero-cta {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		margin-bottom: 4rem;
+		flex-wrap: wrap;
+	}
+
+	.hero-features {
+		display: flex;
+		gap: 2rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.feature {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-size: 0.875rem;
+		color: hsl(var(--foreground) / 0.8);
+	}
+
+	.feature-indicator {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: hsl(var(--primary));
+		box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+	}
+
+	.indicator-blue {
+		background: #3b82f6;
+		box-shadow: 0 0 10px #3b82f6;
+	}
+
+	.indicator-purple {
+		background: #8b5cf6;
+		box-shadow: 0 0 10px #8b5cf6;
+	}
+
+	@media (max-width: 768px) {
+		.hero {
+			min-height: 80vh;
+		}
+
+		.hero-description {
+			font-size: 1.125rem;
+		}
+
+		.hero-cta {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.hero-features {
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+</style>

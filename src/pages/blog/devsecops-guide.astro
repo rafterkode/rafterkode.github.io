@@ -1,0 +1,737 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout 
+	title="Guide DevSecOps 2024 : Sécuriser votre pipeline CI/CD - RafterKode"
+	description="Découvrez comment intégrer la sécurité dans vos pipelines DevOps avec ce guide complet. Outils, best practices et exemples concrets pour une approche DevSecOps réussie."
+>
+	<article class="article-layout">
+		<div class="container">
+			<!-- Article Header -->
+			<header class="article-header">
+				<div class="article-meta">
+					<span class="category">DevSecOps</span>
+					<time datetime="2024-01-15" class="date">15 janvier 2024</time>
+					<span class="reading-time">12 min de lecture</span>
+				</div>
+				
+				<h1 class="article-title">
+					Guide DevSecOps 2024 : <span class="gradient-text">Sécuriser votre pipeline CI/CD</span>
+				</h1>
+				
+				<p class="article-subtitle">
+					Intégrez la sécurité dès les premières étapes de développement avec une approche DevSecOps moderne. 
+					Découvrez les outils incontournables et les pratiques qui transformeront votre pipeline.
+				</p>
+				
+				<div class="article-tags">
+					<span class="tag">DevSecOps</span>
+					<span class="tag">CI/CD</span>
+					<span class="tag">Sécurité</span>
+					<span class="tag">Docker</span>
+					<span class="tag">Kubernetes</span>
+				</div>
+			</header>
+
+			<!-- Article Content -->
+			<div class="article-content">
+				<section class="content-section">
+					<h2>Introduction : Pourquoi DevSecOps ?</h2>
+					<p>
+						Dans un monde où les cyberattaques se multiplient et se sophistiquent, intégrer la sécurité dans les processus DevOps n'est plus une option mais une nécessité. Le DevSecOps (Development, Security, Operations) représente cette évolution naturelle qui place la sécurité au cœur du cycle de développement.
+					</p>
+					<p>
+						Contrairement aux approches traditionnelles où la sécurité était vérifiée en fin de cycle, DevSecOps propose d'<strong>intégrer la sécurité dès les premières lignes de code</strong>. Cette méthode permet de détecter et corriger les vulnérabilités plus rapidement, réduisant considérablement les coûts et les risques.
+					</p>
+				</section>
+
+				<section class="content-section">
+					<h2>1. Les fondamentaux du pipeline sécurisé</h2>
+					
+					<h3>Analyse statique du code (SAST)</h3>
+					<p>
+						L'analyse statique permet de détecter les vulnérabilités directement dans le code source, sans exécution. Voici les outils incontournables :
+					</p>
+					
+					<div class="code-block">
+						<div class="code-header">
+							<span class="code-title">Configuration GitHub Actions - SAST</span>
+							<span class="code-lang">YAML</span>
+						</div>
+						<pre><code class="language-yaml">name: Security Scan
+on: [push, pull_request]
+
+jobs:
+  sast-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: auto
+          
+      - name: Run CodeQL
+        uses: github/codeql-action/init@v2
+        with:
+          languages: javascript, python
+          
+      - name: Build application
+        run: npm ci && npm run build
+        
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v2</code></pre>
+					</div>
+
+					<h3>Scan des dépendances</h3>
+					<p>
+						Les vulnérabilités dans les dépendances tierces représentent une surface d'attaque majeure. 
+						Automatisez leur détection avec ces outils :
+					</p>
+					
+					<ul class="feature-list">
+						<li><strong>npm audit</strong> : Scan natif pour les projets Node.js</li>
+						<li><strong>Snyk</strong> : Plateforme complète pour tous les langages</li>
+						<li><strong>OWASP Dependency Check</strong> : Solution open source</li>
+						<li><strong>GitHub Dependabot</strong> : Intégration native GitHub</li>
+					</ul>
+				</section>
+
+				<section class="content-section">
+					<h2>2. Sécurisation des conteneurs</h2>
+					
+					<p>
+						Les conteneurs Docker sont devenus incontournables, mais ils introduisent de nouveaux vecteurs d'attaque. 
+						Voici comment les sécuriser efficacement :
+					</p>
+
+					<h3>Dockerfile sécurisé</h3>
+					<div class="code-block">
+						<div class="code-header">
+							<span class="code-title">Dockerfile - Bonnes pratiques</span>
+							<span class="code-lang">Docker</span>
+						</div>
+						<pre><code class="language-dockerfile"># Utiliser une image de base minimale
+FROM node:18-alpine
+
+# Créer un utilisateur non-root
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Copier les fichiers de dépendances
+COPY package*.json ./
+
+# Installer les dépendances en mode production
+RUN npm ci --only=production && npm cache clean --force
+
+# Copier le code source
+COPY --chown=nextjs:nodejs . .
+
+# Changer d'utilisateur
+USER nextjs
+
+# Exposer le port
+EXPOSE 3000
+
+# Commande de démarrage
+CMD ["npm", "start"]</code></pre>
+					</div>
+
+					<h3>Scan d'images avec Trivy</h3>
+					<div class="code-block">
+						<div class="code-header">
+							<span class="code-title">Pipeline CI/CD - Scan d'image</span>
+							<span class="code-lang">YAML</span>
+						</div>
+						<pre><code class="language-yaml">  container-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build Docker image
+        run: docker build -t myapp:${{ github.sha }} .
+        
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'myapp:${{ github.sha }}'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: 'trivy-results.sarif'</code></pre>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>3. Tests de sécurité dynamiques (DAST)</h2>
+					
+					<p>
+						Les tests dynamiques analysent l'application en cours d'exécution pour détecter les vulnérabilités 
+						qui ne peuvent être identifiées par l'analyse statique.
+					</p>
+
+					<div class="info-card">
+						<div class="info-header">
+							<i data-lucide="lightbulb"></i>
+							<h4>Conseil pratique</h4>
+						</div>
+						<p>
+							Intégrez OWASP ZAP dans votre pipeline pour automatiser les tests de pénétration. 
+							Configurez des seuils de tolérance pour éviter les faux positifs tout en maintenant un niveau de sécurité élevé.
+						</p>
+					</div>
+
+					<h3>Configuration OWASP ZAP</h3>
+					<div class="code-block">
+						<div class="code-header">
+							<span class="code-title">Script ZAP Baseline Scan</span>
+							<span class="code-lang">Bash</span>
+						</div>
+						<pre><code class="language-bash">#!/bin/bash
+
+# Démarrer l'application en mode test
+docker-compose -f docker-compose.test.yml up -d
+
+# Attendre que l'application soit prête
+sleep 30
+
+# Lancer le scan ZAP
+docker run -t owasp/zap2docker-stable zap-baseline.py \
+  -t http://host.docker.internal:3000 \
+  -r zap-report.html \
+  -x zap-report.xml \
+  -I
+
+# Nettoyer
+docker-compose -f docker-compose.test.yml down</code></pre>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>4. Surveillance continue et monitoring</h2>
+					
+					<p>
+						La sécurité ne s'arrête pas au déploiement. Une surveillance continue est essentielle 
+						pour détecter et réagir aux menaces en temps réel.
+					</p>
+
+					<div class="feature-grid">
+						<div class="feature-card">
+							<div class="feature-icon">
+								<i data-lucide="eye"></i>
+							</div>
+							<h4>Monitoring applicatif</h4>
+							<p>Surveillez les comportements anormaux avec des outils comme Falco ou Elastic Security.</p>
+						</div>
+						<div class="feature-card">
+							<div class="feature-icon">
+								<i data-lucide="shield"></i>
+							</div>
+							<h4>Gestion des secrets</h4>
+							<p>Utilisez HashiCorp Vault ou AWS Secrets Manager pour sécuriser vos credentials.</p>
+						</div>
+						<div class="feature-card">
+							<div class="feature-icon">
+								<i data-lucide="alert-triangle"></i>
+							</div>
+							<h4>Alertes proactives</h4>
+							<p>Configurez des alertes automatiques pour les événements de sécurité critiques.</p>
+						</div>
+						<div class="feature-card">
+							<div class="feature-icon">
+								<i data-lucide="clock"></i>
+							</div>
+							<h4>Réponse aux incidents</h4>
+							<p>Automatisez les premiers niveaux de réponse avec des playbooks prédéfinis.</p>
+						</div>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>5. Retour d'expérience et métriques</h2>
+					
+					<p>
+						Après 2 ans d'implémentation DevSecOps dans plusieurs projets, voici les métriques qui comptent vraiment :
+					</p>
+
+					<div class="metrics-grid">
+						<div class="metric-card">
+							<div class="metric-value">-75%</div>
+							<div class="metric-label">Vulnérabilités en production</div>
+						</div>
+						<div class="metric-card">
+							<div class="metric-value">-60%</div>
+							<div class="metric-label">Temps de résolution</div>
+						</div>
+						<div class="metric-card">
+							<div class="metric-value">+40%</div>
+							<div class="metric-label">Vélocité équipe</div>
+						</div>
+						<div class="metric-card">
+							<div class="metric-value">+90%</div>
+							<div class="metric-label">Confiance déploiement</div>
+						</div>
+					</div>
+
+					<div class="warning-card">
+						<div class="warning-header">
+							<i data-lucide="alert-circle"></i>
+							<h4>Attention aux pièges</h4>
+						</div>
+						<ul>
+							<li><strong>Sur-engineering</strong> : Commencez simple et itérez</li>
+							<li><strong>Résistance au changement</strong> : Formez et accompagnez les équipes</li>
+							<li><strong>Faux positifs</strong> : Affinez la configuration des outils</li>
+							<li><strong>Performance</strong> : Optimisez les scans pour ne pas ralentir le pipeline</li>
+						</ul>
+					</div>
+				</section>
+
+				<section class="content-section">
+					<h2>Conclusion et prochaines étapes</h2>
+					
+					<p>
+						L'adoption du DevSecOps est un voyage, pas une destination. Commencez par intégrer l'analyse statique 
+						et le scan des dépendances, puis progressez vers des pratiques plus avancées comme les tests dynamiques 
+						et la surveillance continue.
+					</p>
+
+					<p>
+						<strong>Prochains articles de la série :</strong>
+					</p>
+					<ul class="next-articles">
+						<li>Sécurisation avancée de Kubernetes avec Falco et OPA</li>
+						<li>Gestion des secrets à l'échelle avec HashiCorp Vault</li>
+						<li>Mise en place d'un SOC automatisé pour les équipes DevOps</li>
+					</ul>
+				</section>
+			</div>
+
+			<!-- Article Footer -->
+			<footer class="article-footer">
+				<div class="author-info">
+					<div class="author-avatar">
+						<i data-lucide="user"></i>
+					</div>
+					<div class="author-details">
+						<h4>RafterKode Team</h4>
+						<p>Experts en sécurité et développement, spécialisés dans l'accompagnement des équipes DevOps vers une approche DevSecOps mature.</p>
+					</div>
+				</div>
+				
+				<div class="share-section">
+					<h4>Partager cet article</h4>
+					<div class="share-buttons">
+						<a href="#" class="share-btn twitter">
+							<i data-lucide="twitter"></i>
+							Twitter
+						</a>
+						<a href="#" class="share-btn linkedin">
+							<i data-lucide="linkedin"></i>
+							LinkedIn
+						</a>
+						<a href="#" class="share-btn link">
+							<i data-lucide="link"></i>
+							Copier le lien
+						</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</article>
+	
+	<Footer />
+</Layout>
+
+<style>
+	.article-layout {
+		padding: 2rem 0;
+		background: hsl(var(--background));
+		min-height: 100vh;
+	}
+
+	.article-header {
+		max-width: 800px;
+		margin: 0 auto 4rem;
+		text-align: center;
+	}
+
+	.article-meta {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 2rem;
+		flex-wrap: wrap;
+	}
+
+	.category {
+		background: var(--gradient-primary);
+		color: white;
+		padding: 0.25rem 0.75rem;
+		border-radius: 1rem;
+		font-size: 0.75rem;
+		font-weight: 500;
+	}
+
+	.date,
+	.reading-time {
+		color: hsl(var(--foreground) / 0.7);
+		font-size: 0.875rem;
+	}
+
+	.article-title {
+		font-size: clamp(2rem, 5vw, 3.5rem);
+		font-weight: 700;
+		line-height: 1.2;
+		margin-bottom: 1.5rem;
+	}
+
+	.article-subtitle {
+		font-size: 1.25rem;
+		color: hsl(var(--foreground) / 0.8);
+		line-height: 1.6;
+		margin-bottom: 2rem;
+	}
+
+	.article-tags {
+		display: flex;
+		justify-content: center;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	.tag {
+		padding: 0.5rem 1rem;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		border-radius: 1.5rem;
+		font-size: 0.875rem;
+		color: hsl(var(--foreground) / 0.8);
+	}
+
+	.article-content {
+		max-width: 800px;
+		margin: 0 auto;
+		line-height: 1.8;
+	}
+
+	.content-section {
+		margin-bottom: 3rem;
+	}
+
+	.content-section h2 {
+		font-size: 2rem;
+		font-weight: 600;
+		margin-bottom: 1.5rem;
+		color: hsl(var(--foreground));
+	}
+
+	.content-section h3 {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin: 2rem 0 1rem;
+		color: hsl(var(--foreground));
+	}
+
+	.content-section p {
+		margin-bottom: 1.5rem;
+		color: hsl(var(--foreground) / 0.9);
+	}
+
+	.code-block {
+		background: hsl(var(--card));
+		border: 1px solid hsl(var(--border));
+		border-radius: 0.75rem;
+		overflow: hidden;
+		margin: 2rem 0;
+	}
+
+	.code-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1rem 1.5rem;
+		background: hsl(var(--muted));
+		border-bottom: 1px solid hsl(var(--border));
+	}
+
+	.code-title {
+		font-weight: 500;
+		color: hsl(var(--foreground));
+	}
+
+	.code-lang {
+		font-size: 0.75rem;
+		color: hsl(var(--foreground) / 0.7);
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	.code-block pre {
+		padding: 1.5rem;
+		overflow-x: auto;
+		margin: 0;
+	}
+
+	.code-block code {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.875rem;
+		line-height: 1.6;
+		color: hsl(var(--foreground) / 0.9);
+	}
+
+	.feature-list {
+		list-style: none;
+		margin: 1.5rem 0;
+	}
+
+	.feature-list li {
+		padding: 0.75rem 0;
+		border-bottom: 1px solid hsl(var(--border));
+		color: hsl(var(--foreground) / 0.9);
+	}
+
+	.feature-list li:last-child {
+		border-bottom: none;
+	}
+
+	.info-card,
+	.warning-card {
+		padding: 1.5rem;
+		border-radius: 0.75rem;
+		margin: 2rem 0;
+	}
+
+	.info-card {
+		background: hsl(var(--primary) / 0.1);
+		border: 1px solid hsl(var(--primary) / 0.2);
+	}
+
+	.warning-card {
+		background: hsl(45 93% 47% / 0.1);
+		border: 1px solid hsl(45 93% 47% / 0.2);
+	}
+
+	.info-header,
+	.warning-header {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 1rem;
+	}
+
+	.info-header i {
+		color: hsl(var(--primary));
+	}
+
+	.warning-header i {
+		color: hsl(45 93% 47%);
+	}
+
+	.info-header h4,
+	.warning-header h4 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		margin: 0;
+	}
+
+	.feature-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1.5rem;
+		margin: 2rem 0;
+	}
+
+	.feature-card {
+		background: hsl(var(--card));
+		border: 1px solid hsl(var(--border));
+		border-radius: 0.75rem;
+		padding: 1.5rem;
+		text-align: center;
+	}
+
+	.feature-icon {
+		width: 48px;
+		height: 48px;
+		border-radius: 12px;
+		background: hsl(var(--primary) / 0.1);
+		border: 1px solid hsl(var(--primary) / 0.2);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 1rem;
+	}
+
+	.feature-icon i {
+		width: 24px;
+		height: 24px;
+		color: hsl(var(--primary));
+	}
+
+	.feature-card h4 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.metrics-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1.5rem;
+		margin: 2rem 0;
+	}
+
+	.metric-card {
+		background: hsl(var(--card));
+		border: 1px solid hsl(var(--border));
+		border-radius: 0.75rem;
+		padding: 2rem 1.5rem;
+		text-align: center;
+	}
+
+	.metric-value {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: hsl(var(--primary));
+		margin-bottom: 0.5rem;
+	}
+
+	.metric-label {
+		font-size: 0.875rem;
+		color: hsl(var(--foreground) / 0.7);
+	}
+
+	.next-articles {
+		list-style: none;
+		margin: 1.5rem 0;
+	}
+
+	.next-articles li {
+		padding: 0.75rem 0 0.75rem 2rem;
+		position: relative;
+		color: hsl(var(--foreground) / 0.9);
+	}
+
+	.next-articles li::before {
+		content: "→";
+		position: absolute;
+		left: 0;
+		color: hsl(var(--primary));
+		font-weight: bold;
+	}
+
+	.article-footer {
+		max-width: 800px;
+		margin: 4rem auto 0;
+		padding-top: 3rem;
+		border-top: 1px solid hsl(var(--border));
+	}
+
+	.author-info {
+		display: flex;
+		gap: 1.5rem;
+		margin-bottom: 3rem;
+		align-items: center;
+	}
+
+	.author-avatar {
+		width: 64px;
+		height: 64px;
+		border-radius: 50%;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+
+	.author-avatar i {
+		width: 32px;
+		height: 32px;
+		color: hsl(var(--foreground) / 0.7);
+	}
+
+	.author-details h4 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.author-details p {
+		color: hsl(var(--foreground) / 0.8);
+		margin: 0;
+	}
+
+	.share-section h4 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		margin-bottom: 1rem;
+	}
+
+	.share-buttons {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.share-btn {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1rem;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		border-radius: 0.5rem;
+		text-decoration: none;
+		color: hsl(var(--foreground));
+		font-size: 0.875rem;
+		transition: all 0.3s ease;
+	}
+
+	.share-btn:hover {
+		background: hsl(var(--primary));
+		color: white;
+	}
+
+	.share-btn i {
+		width: 16px;
+		height: 16px;
+	}
+
+	@media (max-width: 768px) {
+		.article-layout {
+			padding: 1rem 0;
+		}
+
+		.article-meta {
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+
+		.feature-grid,
+		.metrics-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.author-info {
+			flex-direction: column;
+			text-align: center;
+		}
+
+		.share-buttons {
+			justify-content: center;
+		}
+
+		.code-block pre {
+			padding: 1rem;
+		}
+	}
+</style>

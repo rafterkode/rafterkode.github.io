@@ -1,0 +1,159 @@
+---
+export interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = "Tech Explorer & Developer Blog - Exploration DevSecOps, WordPress, JavaScript, SAAS et IA" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{title}</title>
+		
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+		
+		<!-- Lucide Icons -->
+		<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+	</head>
+	<body>
+		<slot />
+		<script>
+			// Initialize Lucide icons after DOM is loaded
+			document.addEventListener('DOMContentLoaded', function() {
+				if (typeof lucide !== 'undefined') {
+					lucide.createIcons();
+				}
+			});
+		</script>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		/* Colors */
+		--background: 220 20% 6%;
+		--foreground: 220 14% 96%;
+		--primary: 142 76% 45%;
+		--secondary: 220 15% 12%;
+		--accent: 142 76% 45%;
+		--card: 220 15% 8%;
+		--muted: 220 15% 12%;
+		--border: 220 15% 15%;
+		
+		/* Gradients */
+		--gradient-primary: linear-gradient(135deg, hsl(142 76% 45%), hsl(172 76% 45%));
+		--gradient-hero: linear-gradient(135deg, hsl(220 20% 6%), hsl(220 15% 8%), hsl(142 76% 45% / 0.1));
+		
+		/* Effects */
+		--shadow-glow: 0 0 40px hsl(142 76% 45% / 0.3);
+		--shadow-card: 0 8px 32px hsl(220 20% 6% / 0.4);
+	}
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	html {
+		font-family: 'Inter', system-ui, sans-serif;
+		scroll-behavior: smooth;
+	}
+
+	body {
+		background: hsl(var(--background));
+		color: hsl(var(--foreground));
+		line-height: 1.6;
+		min-height: 100vh;
+	}
+
+	.font-mono {
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	.gradient-text {
+		background: var(--gradient-primary);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.glass {
+		backdrop-filter: blur(10px);
+		background: hsla(220, 15%, 8%, 0.8);
+		border: 1px solid hsl(var(--border));
+	}
+
+	.card {
+		background: hsl(var(--card));
+		border: 1px solid hsl(var(--border));
+		border-radius: 1rem;
+		padding: 1.5rem;
+		transition: all 0.3s ease;
+	}
+
+	.card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-card);
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		border: none;
+		cursor: pointer;
+	}
+
+	.btn-primary {
+		background: var(--gradient-primary);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		box-shadow: var(--shadow-glow);
+		transform: translateY(-2px);
+	}
+
+	.btn-secondary {
+		background: hsl(var(--secondary));
+		color: hsl(var(--foreground));
+		border: 1px solid hsl(var(--border));
+	}
+
+	.btn-secondary:hover {
+		background: hsl(var(--muted));
+	}
+
+	/* Container utilities */
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1rem;
+	}
+
+	.section {
+		padding: 5rem 0;
+	}
+
+	@media (max-width: 768px) {
+		.section {
+			padding: 3rem 0;
+		}
+	}
+</style>

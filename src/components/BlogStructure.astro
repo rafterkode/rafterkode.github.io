@@ -1,0 +1,214 @@
+---
+const structureItems = [
+	{
+		title: "Articles Datés",
+		icon: "calendar",
+		description: "Organisation chronologique claire avec système de dates"
+	},
+	{
+		title: "Système de Tags",
+		icon: "tag",
+		description: "Catégorisation précise pour une navigation intuitive"
+	},
+	{
+		title: "Partage Social",
+		icon: "share-2",
+		description: "Intégration des réseaux sociaux et boutons de partage"
+	},
+	{
+		title: "Catégories",
+		icon: "book-open",
+		description: "Regroupement thématique des contenus techniques"
+	}
+];
+
+const approachItems = [
+	{
+		title: "Pragmatique",
+		icon: "target",
+		description: "Solutions concrètes et applicables immédiatement"
+	},
+	{
+		title: "Vulgarisation",
+		icon: "lightbulb",
+		description: "Concepts complexes expliqués simplement"
+	},
+	{
+		title: "Retours d'expérience",
+		icon: "users",
+		description: "Cas réels et lessons learned du terrain"
+	}
+];
+
+const technologies = ["Générateur Statique", "GitHub Pages", "Design Responsive", "Commentaires"];
+---
+
+<section class="section blog-structure">
+	<div class="container">
+		<!-- Structure Section -->
+		<div class="structure-section">
+			<h2 class="section-title gradient-text">Structure du Blog</h2>
+			<div class="structure-grid">
+				{structureItems.map((item) => (
+					<div class="structure-card card">
+						<div class="structure-icon">
+							<i data-lucide={item.icon}></i>
+						</div>
+						<h3 class="structure-title">{item.title}</h3>
+						<p class="structure-description">{item.description}</p>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- Approach Section -->
+		<div class="approach-section">
+			<h2 class="section-title gradient-text">Approche Éditoriale</h2>
+			<div class="approach-grid">
+				{approachItems.map((item) => (
+					<div class="approach-card card">
+						<div class="approach-icon">
+							<i data-lucide={item.icon}></i>
+						</div>
+						<h3 class="approach-title">{item.title}</h3>
+						<p class="approach-description">{item.description}</p>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- Technologies Section -->
+		<div class="tech-section">
+			<div class="tech-card card">
+				<h3 class="tech-title">Technologies de Publication</h3>
+				<div class="tech-badges">
+					{technologies.map((tech) => (
+						<span class="tech-badge">{tech}</span>
+					))}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.blog-structure {
+		background: hsl(var(--secondary) / 0.3);
+	}
+
+	.structure-section,
+	.approach-section {
+		margin-bottom: 4rem;
+	}
+
+	.structure-section h2,
+	.approach-section h2 {
+		text-align: center;
+		margin-bottom: 3rem;
+		font-size: clamp(2rem, 4vw, 2.5rem);
+	}
+
+	.structure-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	.approach-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+	}
+
+	.structure-card,
+	.approach-card {
+		text-align: center;
+		height: 200px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.structure-icon,
+	.approach-icon {
+		width: 56px;
+		height: 56px;
+		border-radius: 16px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: hsl(var(--primary) / 0.1);
+		border: 1px solid hsl(var(--primary) / 0.2);
+		margin: 0 auto 1rem;
+	}
+
+	.structure-icon i,
+	.approach-icon i {
+		width: 28px;
+		height: 28px;
+		color: hsl(var(--primary));
+	}
+
+	.structure-title,
+	.approach-title {
+		font-size: 1.125rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.structure-description,
+	.approach-description {
+		font-size: 0.875rem;
+		color: hsl(var(--foreground) / 0.7);
+		line-height: 1.5;
+	}
+
+	.tech-section {
+		display: flex;
+		justify-content: center;
+	}
+
+	.tech-card {
+		text-align: center;
+		max-width: 600px;
+		width: 100%;
+	}
+
+	.tech-title {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin-bottom: 1.5rem;
+		color: hsl(var(--foreground));
+	}
+
+	.tech-badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		justify-content: center;
+	}
+
+	.tech-badge {
+		padding: 0.5rem 1rem;
+		background: var(--gradient-primary);
+		color: white;
+		border-radius: 1.5rem;
+		font-size: 0.875rem;
+		font-weight: 500;
+		box-shadow: 0 4px 12px hsl(var(--primary) / 0.2);
+	}
+
+	@media (max-width: 768px) {
+		.structure-grid,
+		.approach-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.structure-card,
+		.approach-card {
+			height: auto;
+			padding: 2rem 1rem;
+		}
+	}
+</style>

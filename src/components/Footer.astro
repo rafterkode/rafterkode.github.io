@@ -1,0 +1,259 @@
+---
+const navigationLinks = [
+	{ name: "Accueil", href: "/" },
+	{ name: "Articles", href: "/blog" },
+	{ name: "À propos", href: "/about" },
+	{ name: "Contact", href: "/contact" }
+];
+
+const themeLinks = [
+	{ name: "DevSecOps", href: "/blog/devsecops" },
+	{ name: "WordPress", href: "/blog/wordpress" },
+	{ name: "JavaScript", href: "/blog/javascript" },
+	{ name: "SAAS & Cloud", href: "/blog/saas" },
+	{ name: "Intelligence Artificielle", href: "/blog/ia" }
+];
+
+const socialLinks = [
+	{ name: "GitHub", href: "https://github.com/rafterkode", icon: "github" },
+	{ name: "Twitter", href: "https://twitter.com/rafterkode", icon: "twitter" },
+	{ name: "LinkedIn", href: "https://linkedin.com/in/rafterkode", icon: "linkedin" },
+	{ name: "Email", href: "mailto:contact@rafterkode.dev", icon: "mail" }
+];
+
+const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"];
+---
+
+<footer class="footer">
+	<div class="container">
+		<div class="footer-content">
+			<!-- Brand Section -->
+			<div class="footer-brand">
+				<div class="brand-logo">
+					<i data-lucide="code-2"></i>
+					<span class="brand-name gradient-text">RafterKode</span>
+				</div>
+				<p class="brand-description">
+					Tech Explorer & Developer Blog spécialisé dans l'exploration des technologies modernes : 
+					DevSecOps, WordPress, JavaScript, SAAS et Intelligence Artificielle.
+				</p>
+				<div class="brand-technologies">
+					{technologies.map((tech) => (
+						<span class="tech-badge">{tech}</span>
+					))}
+				</div>
+			</div>
+
+			<!-- Links Sections -->
+			<div class="footer-links">
+				<div class="links-column">
+					<h3 class="links-title">Navigation</h3>
+					<ul class="links-list">
+						{navigationLinks.map((link) => (
+							<li>
+								<a href={link.href} class="link">{link.name}</a>
+							</li>
+						))}
+					</ul>
+				</div>
+
+				<div class="links-column">
+					<h3 class="links-title">Thèmes</h3>
+					<ul class="links-list">
+						{themeLinks.map((link) => (
+							<li>
+								<a href={link.href} class="link">{link.name}</a>
+							</li>
+						))}
+					</ul>
+				</div>
+			</div>
+
+			<!-- Social Links -->
+			<div class="footer-social">
+				<h3 class="social-title">Suivez-nous</h3>
+				<div class="social-links">
+					{socialLinks.map((social) => (
+						<a href={social.href} class="social-link" title={social.name} target="_blank" rel="noopener">
+							<i data-lucide={social.icon}></i>
+						</a>
+					))}
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer Bottom -->
+		<div class="footer-bottom">
+			<div class="footer-divider"></div>
+			<div class="footer-copyright">
+				<p>
+					© 2024 RafterKode. Fait avec 
+					<i data-lucide="heart" class="heart-icon"></i> 
+					pour la communauté tech française.
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.footer {
+		background: hsl(var(--card));
+		border-top: 1px solid hsl(var(--border));
+		padding: 4rem 0 2rem;
+	}
+
+	.footer-content {
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr;
+		gap: 3rem;
+		margin-bottom: 3rem;
+	}
+
+	.footer-brand {
+		max-width: 400px;
+	}
+
+	.brand-logo {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 1rem;
+	}
+
+	.brand-logo i {
+		width: 32px;
+		height: 32px;
+		color: hsl(var(--primary));
+	}
+
+	.brand-name {
+		font-size: 1.5rem;
+		font-weight: 700;
+	}
+
+	.brand-description {
+		color: hsl(var(--foreground) / 0.8);
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
+	}
+
+	.brand-technologies {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.tech-badge {
+		padding: 0.25rem 0.75rem;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		border-radius: 1rem;
+		font-size: 0.75rem;
+		color: hsl(var(--foreground) / 0.8);
+	}
+
+	.footer-links {
+		display: flex;
+		gap: 3rem;
+	}
+
+	.links-column {
+		flex: 1;
+	}
+
+	.links-title,
+	.social-title {
+		font-size: 1.125rem;
+		font-weight: 600;
+		margin-bottom: 1rem;
+		color: hsl(var(--foreground));
+	}
+
+	.links-list {
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.link {
+		color: hsl(var(--foreground) / 0.8);
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.link:hover {
+		color: hsl(var(--primary));
+	}
+
+	.social-links {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.social-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		border-radius: 8px;
+		color: hsl(var(--foreground) / 0.8);
+		text-decoration: none;
+		transition: all 0.3s ease;
+	}
+
+	.social-link:hover {
+		background: hsl(var(--primary));
+		color: white;
+		transform: translateY(-2px);
+	}
+
+	.social-link i {
+		width: 20px;
+		height: 20px;
+	}
+
+	.footer-bottom {
+		border-top: 1px solid hsl(var(--border));
+		padding-top: 2rem;
+	}
+
+	.footer-copyright {
+		text-align: center;
+	}
+
+	.footer-copyright p {
+		color: hsl(var(--foreground) / 0.6);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+
+	.heart-icon {
+		width: 16px;
+		height: 16px;
+		color: #ef4444;
+	}
+
+	@media (max-width: 768px) {
+		.footer-content {
+			grid-template-columns: 1fr;
+			gap: 2rem;
+		}
+
+		.footer-links {
+			flex-direction: column;
+			gap: 2rem;
+		}
+
+		.footer-copyright p {
+			flex-direction: column;
+			gap: 0.25rem;
+		}
+	}
+</style>

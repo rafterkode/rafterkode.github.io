@@ -1,0 +1,246 @@
+---
+const themes = [
+	{
+		title: "DevSecOps & Sécurité",
+		icon: "shield",
+		color: "red",
+		tags: ["CI/CD", "Sécurité", "Audits", "DevOps"],
+		features: ["Pipelines sécurisés", "Audits", "Outils DevSecOps", "Méthodologies"]
+	},
+	{
+		title: "WordPress Pro",
+		icon: "globe",
+		color: "blue",
+		tags: ["WordPress", "Performance", "Plugins", "Migration"],
+		features: ["Optimisation avancée", "Sécurisation expert", "Plugins sur mesure", "Migration"]
+	},
+	{
+		title: "Frameworks JavaScript",
+		icon: "code-2",
+		color: "yellow",
+		tags: ["React", "Vue", "Angular", "Patterns"],
+		features: ["Comparatifs détaillés", "Techniques modernes", "Patterns", "Projets réels"]
+	},
+	{
+		title: "SAAS & Architecture Cloud",
+		icon: "cloud",
+		color: "purple",
+		tags: ["SAAS", "Cloud", "Scalabilité", "Architecture"],
+		features: ["Architectures scalables", "Déploiement cloud", "Optimisation coûts", "Providers"]
+	},
+	{
+		title: "Intelligence Artificielle",
+		icon: "brain",
+		color: "green",
+		tags: ["IA", "Machine Learning", "Éthique", "Innovation"],
+		features: ["Tendances IA", "Cas d'usage concrets", "Tutoriels pratiques", "Éthique"]
+	}
+];
+---
+
+<section id="blog-themes" class="section">
+	<div class="container">
+		<div class="section-header">
+			<h2 class="section-title gradient-text">Thèmes Techniques</h2>
+			<p class="section-description">
+				Explorez nos domaines d'expertise à travers des contenus techniques approfondis et des retours d'expérience pratiques.
+			</p>
+		</div>
+		
+		<div class="themes-grid">
+			{themes.map((theme) => (
+				<div class={`theme-card card theme-${theme.color}`}>
+					<div class="theme-header">
+						<div class="theme-icon">
+							<i data-lucide={theme.icon}></i>
+						</div>
+						<h3 class="theme-title">{theme.title}</h3>
+					</div>
+					
+					<div class="theme-tags">
+						{theme.tags.map((tag) => (
+							<span class="tag">{tag}</span>
+						))}
+					</div>
+					
+					<div class="theme-features">
+						{theme.features.map((feature) => (
+							<div class="feature-item">
+								<i data-lucide="check"></i>
+								<span>{feature}</span>
+							</div>
+						))}
+					</div>
+					
+					<div class="theme-overlay"></div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.section-header {
+		text-align: center;
+		margin-bottom: 4rem;
+	}
+
+	.section-title {
+		font-size: clamp(2rem, 5vw, 3rem);
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+
+	.section-description {
+		font-size: 1.125rem;
+		color: hsl(var(--foreground) / 0.8);
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	.themes-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+
+	.theme-card {
+		position: relative;
+		overflow: hidden;
+		cursor: pointer;
+		height: 280px;
+	}
+
+	.theme-header {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.theme-icon {
+		width: 48px;
+		height: 48px;
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: hsl(var(--primary) / 0.1);
+		border: 1px solid hsl(var(--primary) / 0.2);
+	}
+
+	.theme-icon i {
+		width: 24px;
+		height: 24px;
+		color: hsl(var(--primary));
+	}
+
+	.theme-title {
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
+
+	.theme-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.tag {
+		padding: 0.25rem 0.75rem;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		border-radius: 1rem;
+		font-size: 0.75rem;
+		color: hsl(var(--foreground) / 0.8);
+	}
+
+	.theme-features {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.feature-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.875rem;
+		color: hsl(var(--foreground) / 0.8);
+	}
+
+	.feature-item i {
+		width: 16px;
+		height: 16px;
+		color: hsl(var(--primary));
+	}
+
+	.theme-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: var(--gradient-primary);
+		opacity: 0;
+		transition: opacity 0.3s ease;
+		pointer-events: none;
+	}
+
+	.theme-card:hover .theme-overlay {
+		opacity: 0.1;
+	}
+
+	/* Theme color variants */
+	.theme-red .theme-icon {
+		background: hsl(0 84% 60% / 0.1);
+		border-color: hsl(0 84% 60% / 0.2);
+	}
+
+	.theme-red .theme-icon i,
+	.theme-red .feature-item i {
+		color: hsl(0 84% 60%);
+	}
+
+	.theme-blue .theme-icon {
+		background: hsl(217 91% 60% / 0.1);
+		border-color: hsl(217 91% 60% / 0.2);
+	}
+
+	.theme-blue .theme-icon i,
+	.theme-blue .feature-item i {
+		color: hsl(217 91% 60%);
+	}
+
+	.theme-yellow .theme-icon {
+		background: hsl(45 93% 47% / 0.1);
+		border-color: hsl(45 93% 47% / 0.2);
+	}
+
+	.theme-yellow .theme-icon i,
+	.theme-yellow .feature-item i {
+		color: hsl(45 93% 47%);
+	}
+
+	.theme-purple .theme-icon {
+		background: hsl(262 83% 58% / 0.1);
+		border-color: hsl(262 83% 58% / 0.2);
+	}
+
+	.theme-purple .theme-icon i,
+	.theme-purple .feature-item i {
+		color: hsl(262 83% 58%);
+	}
+
+	.theme-green .theme-icon {
+		background: hsl(var(--primary) / 0.1);
+		border-color: hsl(var(--primary) / 0.2);
+	}
+
+	@media (max-width: 768px) {
+		.themes-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
