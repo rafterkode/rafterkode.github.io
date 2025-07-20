@@ -60,7 +60,7 @@ import Footer from '../../components/Footer.astro';
 							<span class="code-title">Configuration GitHub Actions - SAST</span>
 							<span class="code-lang">YAML</span>
 						</div>
-						<pre><code class="language-yaml">{`name: Security Scan
+						<pre><code class="language-yaml">name: Security Scan
 on: [push, pull_request]
 
 jobs:
@@ -83,7 +83,7 @@ jobs:
         run: npm ci && npm run build
         
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v2`}</code></pre>
+        uses: github/codeql-action/analyze@v2</code></pre>
 					</div>
 
 					<h3>Scan des dépendances</h3>
@@ -114,7 +114,7 @@ jobs:
 							<span class="code-title">Dockerfile - Bonnes pratiques</span>
 							<span class="code-lang">Docker</span>
 						</div>
-						<pre><code class="language-dockerfile">{`# Utiliser une image de base minimale
+						<pre><code class="language-dockerfile"># Utiliser une image de base minimale
 FROM node:18-alpine
 
 # Créer un utilisateur non-root
@@ -140,7 +140,7 @@ USER nextjs
 EXPOSE 3000
 
 # Commande de démarrage
-CMD ["npm", "start"]`}</code></pre>
+CMD ["npm", "start"]</code></pre>
 					</div>
 
 					<h3>Scan d'images avec Trivy</h3>
@@ -149,7 +149,7 @@ CMD ["npm", "start"]`}</code></pre>
 							<span class="code-title">Pipeline CI/CD - Scan d'image</span>
 							<span class="code-lang">YAML</span>
 						</div>
-						<pre><code class="language-yaml">{`  container-scan:
+						<pre><code class="language-yaml">  container-scan:
     runs-on: ubuntu-latest
     steps:
       - name: Build Docker image
@@ -165,7 +165,7 @@ CMD ["npm", "start"]`}</code></pre>
       - name: Upload Trivy scan results
         uses: github/codeql-action/upload-sarif@v2
         with:
-          sarif_file: 'trivy-results.sarif'`}</code></pre>
+          sarif_file: 'trivy-results.sarif'</code></pre>
 					</div>
 				</section>
 
@@ -194,7 +194,7 @@ CMD ["npm", "start"]`}</code></pre>
 							<span class="code-title">Script ZAP Baseline Scan</span>
 							<span class="code-lang">Bash</span>
 						</div>
-						<pre><code class="language-bash">{`#!/bin/bash
+						<pre><code class="language-bash">#!/bin/bash
 
 # Démarrer l'application en mode test
 docker-compose -f docker-compose.test.yml up -d
@@ -210,7 +210,7 @@ docker run -t owasp/zap2docker-stable zap-baseline.py \
   -I
 
 # Nettoyer
-docker-compose -f docker-compose.test.yml down`}</code></pre>
+docker-compose -f docker-compose.test.yml down</code></pre>
 					</div>
 				</section>
 
