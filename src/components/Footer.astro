@@ -1,24 +1,24 @@
 ---
 const navigationLinks = [
 	{ name: "Accueil", href: "/" },
-	{ name: "Themes", href: "#blog-themes" },
-	{ name: "A propos", href: "/about" },
-	{ name: "Contact", href: "/contact" }
+	{ name: "Expertises", href: "#expertise-themes" },
+	{ name: "Methodologie", href: "#portfolio-structure" },
+	{ name: "Site Pro", href: "https://raftersys.com" }
 ];
 
-const themeLinks = [
+const expertiseLinks = [
 	{ name: "DevSecOps", href: "/blog/devsecops" },
 	{ name: "WordPress", href: "/blog/wordpress" },
 	{ name: "JavaScript", href: "/blog/javascript" },
 	{ name: "SAAS & Cloud", href: "/blog/saas" },
-	{ name: "Intelligence Artificielle", href: "/blog/ia" }
+	{ name: "Intelligence Artificielle", href: "/blog/ia" },
+	{ name: "Formation & Conseil", href: "/blog/formation" }
 ];
 
 const socialLinks = [
 	{ name: "GitHub", href: "https://github.com/rafterkode", icon: "github" },
-	{ name: "Twitter", href: "https://twitter.com/rafterkode", icon: "twitter" },
 	{ name: "LinkedIn", href: "https://linkedin.com/in/rafterkode", icon: "linkedin" },
-	{ name: "Email", href: "mailto:contact@rafterkode.dev", icon: "mail" }
+	{ name: "Email", href: "mailto:contact@rafterkode.dev?subject=Contact%20depuis%20le%20portfolio&body=Bonjour,%0D%0A%0D%0AJe%20vous%20contacte%20depuis%20votre%20portfolio%20technique.%0D%0A%0D%0A", icon: "mail" }
 ];
 
 const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"];
@@ -34,8 +34,9 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 					<span class="brand-name gradient-text">RafterKode</span>
 				</div>
 				<p class="brand-description">
-					Tech Explorer & Developer Blog spécialisé dans l'exploration des technologies modernes : 
-					DevSecOps, WordPress, JavaScript, SAAS et Intelligence Artificielle.
+					Portfolio technique spécialisé dans les technologies modernes : 
+					DevSecOps, WordPress, JavaScript, SAAS et Intelligence Artificielle. 
+					Complément technique de <a href="https://raftersys.com" target="_blank" rel="noopener noreferrer" class="pro-link">raftersys.com</a>
 				</p>
 				<div class="brand-technologies">
 					{technologies.map((tech) => (
@@ -58,9 +59,9 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 				</div>
 
 				<div class="links-column">
-					<h3 class="links-title">Thèmes</h3>
+					<h3 class="links-title">Expertises</h3>
 					<ul class="links-list">
-						{themeLinks.map((link) => (
+						{expertiseLinks.map((link) => (
 							<li>
 								<a href={link.href} class="link">{link.name}</a>
 							</li>
@@ -89,7 +90,7 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 				<p>
 					© 2024 RafterKode. Fait avec 
 					<i data-lucide="heart" class="heart-icon"></i> 
-					pour la communauté tech française.
+					pour partager l'expertise technique.
 				</p>
 			</div>
 		</div>
@@ -238,6 +239,18 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 		width: 16px;
 		height: 16px;
 		color: #ef4444;
+	}
+
+	.pro-link {
+		color: hsl(var(--primary));
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.3s ease;
+	}
+
+	.pro-link:hover {
+		color: hsl(var(--primary) / 0.8);
+		text-decoration: underline;
 	}
 
 	@media (max-width: 768px) {

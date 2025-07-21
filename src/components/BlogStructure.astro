@@ -1,53 +1,53 @@
 ---
 const structureItems = [
 	{
-		title: "Articles Dates",
-		icon: "calendar",
-		description: "Organisation chronologique claire avec systeme de dates"
+		title: "Projets Réalisés",
+		icon: "folder",
+		description: "Portfolio de réalisations concrètes avec technologies utilisées"
 	},
 	{
-		title: "Système de Tags",
+		title: "Compétences Techniques",
 		icon: "tag",
-		description: "Categorisation precise pour une navigation intuitive"
+		description: "Expertise détaillée par domaine et niveau de maîtrise"
 	},
 	{
-		title: "Partage Social",
-		icon: "share-2",
-		description: "Integration des reseaux sociaux et boutons de partage"
+		title: "Certifications",
+		icon: "award",
+		description: "Certifications professionnelles et formations continues"
 	},
 	{
-		title: "Categories",
-		icon: "book-open",
-		description: "Regroupement thematique des contenus techniques"
+		title: "Veille Technologique",
+		icon: "trending-up",
+		description: "Suivi des innovations et tendances du marché"
 	}
 ];
 
 const approachItems = [
 	{
-		title: "Pragmatique",
+		title: "Approche Pragmatique",
 		icon: "target",
-		description: "Solutions concretes et applicables immediatement"
+		description: "Solutions concrètes et applicables immédiatement en entreprise"
 	},
 	{
-		title: "Vulgarisation",
-		icon: "lightbulb",
-		description: "Concepts complexes expliques simplement"
+		title: "Qualité & Performance",
+		icon: "zap",
+		description: "Code propre, optimisé et respectant les bonnes pratiques"
 	},
 	{
-		title: "Retours d'expérience",
-		icon: "users",
-		description: "Cas reels et lessons learned du terrain"
+		title: "Sécurité First",
+		icon: "shield-check",
+		description: "Sécurité intégrée dès la conception des projets"
 	}
 ];
 
-const technologies = ["Generateur Statique", "GitHub Pages", "Design Responsive", "Commentaires"];
+const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance Optimisée"];
 ---
 
-<section class="section blog-structure">
+<section class="section portfolio-structure">
 	<div class="container">
 		<!-- Structure Section -->
 		<div class="structure-section">
-			<h2 class="section-title gradient-text">Structure du Blog</h2>
+			<h2 class="section-title gradient-text">Méthodologie de Travail</h2>
 			<div class="structure-grid">
 				{structureItems.map((item) => (
 					<div class="structure-card card">
@@ -63,7 +63,7 @@ const technologies = ["Generateur Statique", "GitHub Pages", "Design Responsive"
 
 		<!-- Approach Section -->
 		<div class="approach-section">
-			<h2 class="section-title gradient-text">Approche Éditoriale</h2>
+			<h2 class="section-title gradient-text">Philosophie Technique</h2>
 			<div class="approach-grid">
 				{approachItems.map((item) => (
 					<div class="approach-card card">
@@ -80,7 +80,7 @@ const technologies = ["Generateur Statique", "GitHub Pages", "Design Responsive"
 		<!-- Technologies Section -->
 		<div class="tech-section">
 			<div class="tech-card card">
-				<h3 class="tech-title">Technologies de Publication</h3>
+				<h3 class="tech-title">Technologies de ce Portfolio</h3>
 				<div class="tech-badges">
 					{technologies.map((tech) => (
 						<span class="tech-badge">{tech}</span>
@@ -92,7 +92,7 @@ const technologies = ["Generateur Statique", "GitHub Pages", "Design Responsive"
 </section>
 
 <style>
-	.blog-structure {
+	.portfolio-structure {
 		background: hsl(var(--secondary) / 0.3);
 	}
 

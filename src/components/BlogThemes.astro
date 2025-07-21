@@ -1,49 +1,56 @@
 ---
 const themes = [
 	{
-		title: "DevSecOps et Securite",
+		title: "DevSecOps et Sécurité",
 		icon: "shield",
 		color: "red",
-		tags: ["CI/CD", "Sécurité", "Audits", "DevOps"],
-		features: ["Pipelines securises", "Audits", "Outils DevSecOps", "Methodologies"]
+		tags: ["CI/CD", "Sécurité", "Audits", "Automatisation"],
+		features: ["Pipelines sécurisés", "Audits de sécurité", "Outils DevSecOps", "Méthodologies agiles"]
 	},
 	{
 		title: "WordPress Pro",
 		icon: "globe",
 		color: "blue",
-		tags: ["WordPress", "Performance", "Plugins", "Migration"],
-		features: ["Optimisation avancee", "Securisation expert", "Plugins sur mesure", "Migration"]
+		tags: ["WordPress", "Performance", "Plugins", "E-commerce"],
+		features: ["Optimisation avancée", "Sécurisation expert", "Plugins sur mesure", "Solutions e-commerce"]
 	},
 	{
 		title: "Frameworks JavaScript",
 		icon: "code-2",
 		color: "yellow",
-		tags: ["React", "Vue", "Angular", "Patterns"],
-		features: ["Comparatifs detailles", "Techniques modernes", "Patterns", "Projets reels"]
+		tags: ["React", "Vue", "Node.js", "TypeScript"],
+		features: ["Applications modernes", "API REST/GraphQL", "Architecture scalable", "Tests automatisés"]
 	},
 	{
-		title: "SAAS et Architecture Cloud",
+		title: "SAAS & Architecture Cloud",
 		icon: "cloud",
 		color: "purple",
-		tags: ["SAAS", "Cloud", "Scalabilite", "Architecture"],
-		features: ["Architectures scalables", "Deploiement cloud", "Optimisation couts", "Providers"]
+		tags: ["SAAS", "AWS", "Docker", "Kubernetes"],
+		features: ["Architectures scalables", "Déploiement cloud", "Optimisation coûts", "Microservices"]
 	},
 	{
 		title: "Intelligence Artificielle",
 		icon: "brain",
 		color: "green",
-		tags: ["IA", "Machine Learning", "Ethique", "Innovation"],
-		features: ["Tendances IA", "Cas d'usage concrets", "Tutoriels pratiques", "Ethique"]
+		tags: ["IA", "Machine Learning", "API", "Automatisation"],
+		features: ["Intégration IA", "Modèles personnalisés", "API intelligentes", "Automatisation métier"]
+	},
+	{
+		title: "Formation & Conseil",
+		icon: "graduation-cap",
+		color: "orange",
+		tags: ["Formation", "Conseil", "Audit", "Accompagnement"],
+		features: ["Formation technique", "Audit de code", "Conseil stratégique", "Accompagnement équipes"]
 	}
 ];
 ---
 
-<section id="blog-themes" class="section">
+<section id="expertise-themes" class="section">
 	<div class="container">
 		<div class="section-header">
-			<h2 class="section-title gradient-text">Thèmes Techniques</h2>
+			<h2 class="section-title gradient-text">Domaines d'Expertise</h2>
 			<p class="section-description">
-				Explorez nos domaines d'expertise à travers des contenus techniques approfondis et des retours d'expérience pratiques.
+				Découvrez mes compétences techniques et les domaines dans lesquels j'interviens pour créer des solutions innovantes et performantes.
 			</p>
 		</div>
 		
@@ -239,6 +246,16 @@ const themes = [
 	.theme-green .theme-icon {
 		background: hsl(var(--primary) / 0.1);
 		border-color: hsl(var(--primary) / 0.2);
+	}
+
+	.theme-orange .theme-icon {
+		background: hsl(25 95% 53% / 0.1);
+		border-color: hsl(25 95% 53% / 0.2);
+	}
+
+	.theme-orange .theme-icon i,
+	.theme-orange .feature-item i {
+		color: hsl(25 95% 53%);
 	}
 
 	@media (max-width: 768px) {
