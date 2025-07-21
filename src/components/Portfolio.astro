@@ -1,5 +1,5 @@
 ---
-const structureItems = [
+const methodologyItems = [
 	{
 		title: "Projets Realises",
 		icon: "folder",
@@ -55,18 +55,18 @@ const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance
 
 <section class="section portfolio-structure">
 	<div class="container">
-		<!-- Structure Section -->
-		<div class="structure-section">
+		<!-- Methodology Section -->
+		<div class="methodology-section">
 			<h2 class="section-title gradient-text">Methodologie de Travail</h2>
-			<div class="structure-grid">
-				{structureItems.map((item) => (
-					<div class="structure-card card">
-						<div class="structure-icon">
+			<div class="methodology-grid">
+				{methodologyItems.map((item) => (
+					<div class="methodology-card card">
+						<div class="methodology-icon">
 							<i data-lucide={item.icon}></i>
 						</div>
-						<div class="structure-content">
-							<h3 class="structure-title">{item.title}</h3>
-							<p class="structure-description">{item.description}</p>
+						<div class="methodology-content">
+							<h3 class="methodology-title">{item.title}</h3>
+							<p class="methodology-description">{item.description}</p>
 						</div>
 					</div>
 				))}
@@ -122,32 +122,26 @@ const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance
 		background: hsl(var(--secondary) / 0.3);
 	}
 
-	.structure-section,
+	.methodology-section,
 	.realisations-section {
 		margin-bottom: 4rem;
 	}
 
-	.structure-section h2,
+	.methodology-section h2,
 	.realisations-section h2 {
 		text-align: center;
 		margin-bottom: 3rem;
 		font-size: clamp(2rem, 4vw, 2.5rem);
 	}
 
-	.structure-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-		gap: 2rem;
-		margin-bottom: 2rem;
-	}
-
+	.methodology-grid,
 	.realisations-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 2rem;
 	}
 
-	.structure-card,
+	.methodology-card,
 	.realisation-card {
 		display: flex;
 		align-items: flex-start;
@@ -156,7 +150,7 @@ const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance
 		padding: 1.5rem;
 	}
 
-	.structure-icon,
+	.methodology-icon,
 	.realisation-icon {
 		width: 56px;
 		height: 56px;
@@ -169,19 +163,19 @@ const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance
 		flex-shrink: 0;
 	}
 
-	.structure-icon i,
+	.methodology-icon i,
 	.realisation-icon i {
 		width: 28px;
 		height: 28px;
 		color: hsl(var(--primary));
 	}
 
-	.structure-content,
+	.methodology-content,
 	.realisation-content {
 		flex: 1;
 	}
 
-	.structure-title,
+	.methodology-title,
 	.realisation-title {
 		font-size: 1.125rem;
 		font-weight: 600;
@@ -189,7 +183,7 @@ const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance
 		color: hsl(var(--foreground));
 	}
 
-	.structure-description,
+	.methodology-description,
 	.realisation-description {
 		font-size: 0.875rem;
 		color: hsl(var(--foreground) / 0.7);
@@ -266,19 +260,19 @@ const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance
 	}
 
 	@media (max-width: 768px) {
-		.structure-grid,
+		.methodology-grid,
 		.realisations-grid {
 			grid-template-columns: 1fr;
 		}
 
-		.structure-card,
+		.methodology-card,
 		.realisation-card {
 			flex-direction: column;
 			text-align: center;
 			min-height: auto;
 		}
 
-		.structure-icon,
+		.methodology-icon,
 		.realisation-icon {
 			margin: 0 auto 1rem;
 		}
