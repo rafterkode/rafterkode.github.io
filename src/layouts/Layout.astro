@@ -17,34 +17,7 @@ const { title, description = "Portfolio technique RafterKode - Expertise DevSecO
 		<meta name="description" content={description} />
 		<title>{title}</title>
 		
-		<!-- Google Fonts -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-		
-		<!-- Lucide Icons -->
-		<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-	</head>
-	<body>
-		<slot />
-		<script>
-			// Initialize Lucide icons after DOM is loaded
-			document.addEventListener('DOMContentLoaded', function() {
-				if (typeof lucide !== 'undefined') {
-					lucide.createIcons();
-				}
-				
-				// Update copyright year automatically
-				const yearElement = document.getElementById('current-year');
-				if (yearElement) {
-					yearElement.textContent = new Date().getFullYear().toString();
-				}
-			});
-		</script>
-	</body>
-</html>
-
-<style is:global>
+		<style is:global>
 	:root {
 		/* Colors */
 		--background: 220 20% 6%;
@@ -163,5 +136,34 @@ const { title, description = "Portfolio technique RafterKode - Expertise DevSecO
 		}
 	}
 </style>
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+		
+		<!-- Lucide Icons -->
+		<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+	</head>
+	<body>
+		<slot />
+		<script>
+			// Initialize Lucide icons after DOM is loaded
+			document.addEventListener('DOMContentLoaded', function() {
+				if (typeof lucide !== 'undefined') {
+					lucide.createIcons();
+				}
+				
+				// Update copyright year automatically
+				const yearElement = document.getElementById('current-year');
+				if (yearElement) {
+					yearElement.textContent = new Date().getFullYear().toString();
+				}
+			});
+		</script>
+	</body>
+</html>
+
+
 
 export default Layout;
