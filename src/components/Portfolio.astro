@@ -1,14 +1,14 @@
 ---
 const methodologyItems = [
 	{
-		title: "Projets Realises",
+		title: "Projets Concrets",
 		icon: "folder",
-		description: "Portfolio de realisations concretes avec technologies utilisees"
+		description: "Portfolio de realisations avec technologies utilisees et retours d'experience"
 	},
 	{
-		title: "Competences Techniques",
+		title: "Competences Pratiques",
 		icon: "tag",
-		description: "Expertise detaillee par domaine et niveau de maitrise"
+		description: "Savoir-faire detaille par domaine et niveau de maitrise"
 	},
 	{
 		title: "Certifications",
@@ -26,22 +26,26 @@ const realisations = [
 	{
 		title: "Workflow Automation avec n8n",
 		icon: "workflow",
-		description: "Automatisation complete avec n8n et integration API Telegram pour notifications en temps reel"
+		description: "Automatisation complete avec n8n et integration API Telegram pour notifications en temps reel",
+		link: null
 	},
 	{
 		title: "Migration AWS EC2 vers ECS",
 		icon: "server",
-		description: "Migration d'architecture pour gain de simplicite, performance, stabilite et securite"
+		description: "Migration d'architecture pour gain de simplicite, performance, stabilite et securite",
+		link: null
 	},
 	{
 		title: "App Diagnostic Device",
 		icon: "smartphone",
-		description: "Application de diagnostic pour tester compatibilite mobile, desktop et tablette"
+		description: "Application de diagnostic pour tester compatibilite mobile, desktop et tablette",
+		link: null
 	},
 	{
 		title: "SAAS SecuritPass",
 		icon: "key",
-		description: "Generateur de mots de passe securises disponible sur securitpass.vercel.app"
+		description: "Generateur de mots de passe securises avec interface moderne",
+		link: "https://securitpass.vercel.app"
 	}
 ];
 
@@ -85,6 +89,19 @@ const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance
 						<div class="realisation-content">
 							<h3 class="realisation-title">{realisation.title}</h3>
 							<p class="realisation-description">{realisation.description}</p>
+							<div class="realisation-link">
+								{realisation.link ? (
+									<a href={realisation.link} target="_blank" rel="noopener noreferrer" class="project-link">
+										<i data-lucide="external-link"></i>
+										Voir le projet
+									</a>
+								) : (
+									<span class="project-na">
+										<i data-lucide="lock"></i>
+										Projet interne
+									</span>
+								)}
+							</div>
 						</div>
 					</div>
 				))}
@@ -188,6 +205,44 @@ const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance
 		font-size: 0.875rem;
 		color: hsl(var(--foreground) / 0.7);
 		line-height: 1.5;
+		margin-bottom: 1rem;
+	}
+
+	.realisation-link {
+		margin-top: auto;
+	}
+
+	.project-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: hsl(var(--primary));
+		text-decoration: none;
+		font-size: 0.875rem;
+		font-weight: 500;
+		transition: all 0.3s ease;
+	}
+
+	.project-link:hover {
+		gap: 0.75rem;
+	}
+
+	.project-link i {
+		width: 14px;
+		height: 14px;
+	}
+
+	.project-na {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: hsl(var(--foreground) / 0.5);
+		font-size: 0.875rem;
+	}
+
+	.project-na i {
+		width: 14px;
+		height: 14px;
 	}
 
 	.competences-section {
