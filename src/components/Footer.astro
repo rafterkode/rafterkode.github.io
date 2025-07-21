@@ -2,7 +2,7 @@
 const navigationLinks = [
 	{ name: "Accueil", href: "/" },
 	{ name: "Expertises", href: "#expertise-themes" },
-	{ name: "Methodologie", href: "#portfolio-structure" },
+	{ name: "Realisations", href: "#portfolio-structure" },
 	{ name: "Site Pro", href: "https://raftersys.com" }
 ];
 
@@ -18,7 +18,7 @@ const expertiseLinks = [
 const socialLinks = [
 	{ name: "GitHub", href: "https://github.com/rafterkode", icon: "github" },
 	{ name: "LinkedIn", href: "https://linkedin.com/in/rafterkode", icon: "linkedin" },
-	{ name: "Email", href: "mailto:contact@rafterkode.dev?subject=Contact%20depuis%20le%20portfolio&body=Bonjour,%0D%0A%0D%0AJe%20vous%20contacte%20depuis%20votre%20portfolio%20technique.%0D%0A%0D%0A", icon: "mail" }
+	{ name: "Email", href: "mailto:contact@raftersys.com?subject=Contact%20depuis%20rafterkode.github.io&body=Bonjour,%0D%0A%0D%0AJe%20vous%20contacte%20depuis%20votre%20portfolio%20technique%20rafterkode.github.io%0D%0A%0D%0A", icon: "mail" }
 ];
 
 const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"];
@@ -31,12 +31,10 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 			<div class="footer-brand">
 				<div class="brand-logo">
 					<i data-lucide="code-2"></i>
-					<span class="brand-name gradient-text">RafterKode</span>
+					<a href="https://rafterkode.github.io" class="brand-name gradient-text">RafterKode</a>
 				</div>
 				<p class="brand-description">
-					Portfolio technique spécialisé dans les technologies modernes : 
-					DevSecOps, WordPress, JavaScript, SAAS et Intelligence Artificielle. 
-					Complément technique de <a href="https://raftersys.com" target="_blank" rel="noopener noreferrer" class="pro-link">raftersys.com</a>
+					Portfolio technique d'un explorateur tech passionne par les technologies modernes : DevSecOps, WordPress, JavaScript, SAAS et Intelligence Artificielle. Complement technique de <a href="https://raftersys.com" target="_blank" rel="noopener noreferrer" class="pro-link">raftersys.com</a>
 				</p>
 				<div class="brand-technologies">
 					{technologies.map((tech) => (
@@ -88,9 +86,9 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 			<div class="footer-divider"></div>
 			<div class="footer-copyright">
 				<p>
-					© 2024 RafterKode. Fait avec 
+					© 2024 RafterKode - Explorateur tech et d'idees. Fait avec 
 					<i data-lucide="heart" class="heart-icon"></i> 
-					pour partager l'expertise technique.
+					pour partager la passion technique.
 				</p>
 			</div>
 		</div>
@@ -131,6 +129,12 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 	.brand-name {
 		font-size: 1.5rem;
 		font-weight: 700;
+		text-decoration: none;
+		transition: opacity 0.3s ease;
+	}
+
+	.brand-name:hover {
+		opacity: 0.8;
 	}
 
 	.brand-description {
@@ -229,10 +233,8 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 
 	.footer-copyright p {
 		color: hsl(var(--foreground) / 0.6);
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 0.5rem;
+		text-align: center;
+		line-height: 1.6;
 	}
 
 	.heart-icon {
@@ -262,11 +264,6 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 		.footer-links {
 			flex-direction: column;
 			gap: 2rem;
-		}
-
-		.footer-copyright p {
-			flex-direction: column;
-			gap: 0.25rem;
 		}
 	}
 </style>
