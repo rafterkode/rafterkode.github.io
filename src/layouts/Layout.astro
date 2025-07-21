@@ -33,6 +33,12 @@ const { title, description = "Portfolio technique RafterKode - Expertise DevSecO
 				if (typeof lucide !== 'undefined') {
 					lucide.createIcons();
 				}
+				
+				// Update copyright year automatically
+				const yearElement = document.getElementById('current-year');
+				if (yearElement) {
+					yearElement.textContent = new Date().getFullYear().toString();
+				}
 			});
 		</script>
 	</body>
