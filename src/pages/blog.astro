@@ -1,0 +1,300 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+const articles = [
+	{
+		title: "Guide DevSecOps 2024 : Sécuriser votre pipeline CI/CD",
+		description: "Intégrez la sécurité dès les premières étapes de développement avec une approche DevSecOps moderne.",
+		category: "DevSecOps",
+		date: "15 janvier 2024",
+		readTime: "12 min",
+		href: "/blog/devsecops-guide",
+		tags: ["DevSecOps", "CI/CD", "Sécurité", "Docker"]
+	},
+	{
+		title: "WordPress Performance : Optimisation avancée pour 2024",
+		description: "Techniques modernes pour accélérer votre site WordPress et améliorer l'expérience utilisateur.",
+		category: "WordPress",
+		date: "10 janvier 2024",
+		readTime: "8 min",
+		href: "#",
+		tags: ["WordPress", "Performance", "Optimisation", "Core Web Vitals"]
+	},
+	{
+		title: "React vs Vue vs Angular : Comparatif 2024",
+		description: "Analyse détaillée des trois frameworks JavaScript les plus populaires avec exemples pratiques.",
+		category: "JavaScript",
+		date: "5 janvier 2024",
+		readTime: "15 min",
+		href: "#",
+		tags: ["React", "Vue", "Angular", "Comparatif"]
+	},
+	{
+		title: "Architecture SAAS : Patterns et bonnes pratiques",
+		description: "Construire une architecture scalable pour votre application SAAS avec les technologies cloud modernes.",
+		category: "SAAS",
+		date: "28 décembre 2023",
+		readTime: "10 min",
+		href: "#",
+		tags: ["SAAS", "Architecture", "Cloud", "Scalabilité"]
+	},
+	{
+		title: "IA Générative : Intégration dans vos projets web",
+		description: "Comment intégrer l'intelligence artificielle générative dans vos applications web existantes.",
+		category: "IA",
+		date: "20 décembre 2023",
+		readTime: "12 min",
+		href: "#",
+		tags: ["IA", "Machine Learning", "API", "Innovation"]
+	}
+];
+
+const categories = ["Tous", "DevSecOps", "WordPress", "JavaScript", "SAAS", "IA"];
+---
+
+<Layout 
+	title="Articles - RafterKode"
+	description="Découvrez nos articles techniques sur DevSecOps, WordPress, JavaScript, SAAS et Intelligence Artificielle. Guides pratiques et retours d'expérience."
+>
+	<main class="blog-page">
+		<div class="container">
+			<!-- Header -->
+			<header class="blog-header">
+				<h1 class="blog-title gradient-text">Articles Techniques</h1>
+				<p class="blog-description">
+					Explorez nos guides pratiques, retours d'expérience et analyses techniques 
+					sur les technologies modernes du développement web.
+				</p>
+			</header>
+
+			<!-- Filters -->
+			<div class="blog-filters">
+				{categories.map((category) => (
+					<button class={`filter-btn ${category === 'Tous' ? 'active' : ''}`}>
+						{category}
+					</button>
+				))}
+			</div>
+
+			<!-- Articles Grid -->
+			<div class="articles-grid">
+				{articles.map((article) => (
+					<article class="article-card card">
+						<div class="article-header">
+							<div class="article-meta">
+								<span class="category">{article.category}</span>
+								<time class="date">{article.date}</time>
+							</div>
+							<span class="read-time">{article.readTime}</span>
+						</div>
+						
+						<h2 class="article-title">
+							<a href={article.href}>{article.title}</a>
+						</h2>
+						
+						<p class="article-description">{article.description}</p>
+						
+						<div class="article-tags">
+							{article.tags.map((tag) => (
+								<span class="tag">{tag}</span>
+							))}
+						</div>
+						
+						<div class="article-footer">
+							<a href={article.href} class="read-more">
+								Lire l'article
+								<i data-lucide="arrow-right"></i>
+							</a>
+						</div>
+					</article>
+				))}
+			</div>
+		</div>
+	</main>
+	
+	<Footer />
+</Layout>
+
+<style>
+	.blog-page {
+		padding: 2rem 0 4rem;
+		min-height: 100vh;
+	}
+
+	.blog-header {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.blog-title {
+		font-size: clamp(2.5rem, 5vw, 4rem);
+		font-weight: 700;
+		margin-bottom: 1rem;
+	}
+
+	.blog-description {
+		font-size: 1.125rem;
+		color: hsl(var(--foreground) / 0.8);
+		max-width: 600px;
+		margin: 0 auto;
+		line-height: 1.6;
+	}
+
+	.blog-filters {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		margin-bottom: 3rem;
+		flex-wrap: wrap;
+	}
+
+	.filter-btn {
+		padding: 0.5rem 1rem;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		border-radius: 1.5rem;
+		color: hsl(var(--foreground) / 0.8);
+		font-size: 0.875rem;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.filter-btn:hover,
+	.filter-btn.active {
+		background: var(--gradient-primary);
+		color: white;
+		border-color: transparent;
+	}
+
+	.articles-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 2rem;
+	}
+
+	.article-card {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	.article-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		margin-bottom: 1rem;
+		gap: 1rem;
+	}
+
+	.article-meta {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.category {
+		background: var(--gradient-primary);
+		color: white;
+		padding: 0.25rem 0.75rem;
+		border-radius: 1rem;
+		font-size: 0.75rem;
+		font-weight: 500;
+		width: fit-content;
+	}
+
+	.date {
+		color: hsl(var(--foreground) / 0.7);
+		font-size: 0.875rem;
+	}
+
+	.read-time {
+		color: hsl(var(--foreground) / 0.7);
+		font-size: 0.875rem;
+		white-space: nowrap;
+	}
+
+	.article-title {
+		margin-bottom: 1rem;
+	}
+
+	.article-title a {
+		color: hsl(var(--foreground));
+		text-decoration: none;
+		font-size: 1.25rem;
+		font-weight: 600;
+		line-height: 1.4;
+		transition: color 0.3s ease;
+	}
+
+	.article-title a:hover {
+		color: hsl(var(--primary));
+	}
+
+	.article-description {
+		color: hsl(var(--foreground) / 0.8);
+		line-height: 1.6;
+		margin-bottom: 1.5rem;
+		flex-grow: 1;
+	}
+
+	.article-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.tag {
+		padding: 0.25rem 0.75rem;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		border-radius: 1rem;
+		font-size: 0.75rem;
+		color: hsl(var(--foreground) / 0.8);
+	}
+
+	.article-footer {
+		margin-top: auto;
+	}
+
+	.read-more {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: hsl(var(--primary));
+		text-decoration: none;
+		font-weight: 500;
+		transition: all 0.3s ease;
+	}
+
+	.read-more:hover {
+		gap: 0.75rem;
+	}
+
+	.read-more i {
+		width: 16px;
+		height: 16px;
+		transition: transform 0.3s ease;
+	}
+
+	.read-more:hover i {
+		transform: translateX(2px);
+	}
+
+	@media (max-width: 768px) {
+		.articles-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.blog-filters {
+			justify-content: flex-start;
+			overflow-x: auto;
+			padding-bottom: 0.5rem;
+		}
+
+		.filter-btn {
+			white-space: nowrap;
+		}
+	}
+</style>

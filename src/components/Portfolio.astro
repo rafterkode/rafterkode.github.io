@@ -1,0 +1,335 @@
+---
+const methodologyItems = [
+	{
+		title: "Projets Concrets",
+		icon: "folder",
+		description: "Portfolio de realisations avec technologies utilisees et retours d'experience"
+	},
+	{
+		title: "Competences Pratiques",
+		icon: "tag",
+		description: "Savoir-faire detaille par domaine et niveau de maitrise"
+	},
+	{
+		title: "Certifications",
+		icon: "award",
+		description: "Certifications professionnelles et formations continues"
+	},
+	{
+		title: "Veille Technologique",
+		icon: "trending-up",
+		description: "Suivi des innovations et tendances du marche"
+	}
+];
+
+const realisations = [
+	{
+		title: "Workflow Automation avec n8n",
+		icon: "workflow",
+		description: "Automatisation complete avec n8n et integration API Telegram pour notifications en temps reel",
+		link: null
+	},
+	{
+		title: "Migration AWS EC2 vers ECS",
+		icon: "server",
+		description: "Migration d'architecture pour gain de simplicite, performance, stabilite et securite",
+		link: null
+	},
+	{
+		title: "App Diagnostic Device",
+		icon: "smartphone",
+		description: "Application de diagnostic pour tester compatibilite mobile, desktop et tablette",
+		link: null
+	},
+	{
+		title: "SAAS SecuritPass",
+		icon: "key",
+		description: "Generateur de mots de passe securises avec interface moderne",
+		link: "https://www.raftersys.com/securitpass"
+	}
+];
+
+const competences = [
+	"n8n", "Vercel", "Supabase", "Netlify", "Agent IA", "LLM", "Vibe Coding", 
+	"AWS ECS", "Telegram API", "Device Testing", "Password Security"
+];
+
+const technologies = ["Astro", "GitHub Pages", "Design Responsive", "Performance Optimisee"];
+---
+
+<section class="section portfolio-structure">
+	<div class="container">
+		<!-- Methodology Section -->
+		<div class="methodology-section">
+			<h2 class="section-title gradient-text">Methodologie de Travail</h2>
+			<div class="methodology-grid">
+				{methodologyItems.map((item) => (
+					<div class="methodology-card card">
+						<div class="methodology-icon">
+							<i data-lucide={item.icon}></i>
+						</div>
+						<div class="methodology-content">
+							<h3 class="methodology-title">{item.title}</h3>
+							<p class="methodology-description">{item.description}</p>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- Realisations Section -->
+		<div class="realisations-section">
+			<h2 class="section-title gradient-text">Realisations & Projets</h2>
+			<div class="realisations-grid">
+				{realisations.map((realisation) => (
+					<div class="realisation-card card">
+						<div class="realisation-icon">
+							<i data-lucide={realisation.icon}></i>
+						</div>
+						<div class="realisation-content">
+							<h3 class="realisation-title">{realisation.title}</h3>
+							<p class="realisation-description">{realisation.description}</p>
+							<div class="realisation-link">
+								{realisation.link ? (
+									<a href={realisation.link} target="_blank" rel="noopener noreferrer" class="project-link">
+										<i data-lucide="external-link"></i>
+										Voir le projet
+									</a>
+								) : (
+									<span class="project-na">
+										<i data-lucide="lock"></i>
+										Projet interne
+									</span>
+								)}
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+
+		<!-- Competences Section -->
+		<div class="competences-section">
+			<div class="competences-card card">
+				<h3 class="competences-title">Competences Techniques Complementaires</h3>
+				<div class="competences-badges">
+					{competences.map((competence) => (
+						<span class="competence-badge">{competence}</span>
+					))}
+				</div>
+			</div>
+		</div>
+
+		<!-- Technologies Section -->
+		<div class="tech-section">
+			<div class="tech-card card">
+				<h3 class="tech-title">Technologies de ce Portfolio</h3>
+				<div class="tech-badges">
+					{technologies.map((tech) => (
+						<span class="tech-badge">{tech}</span>
+					))}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.portfolio-structure {
+		background: hsl(var(--secondary) / 0.3);
+	}
+
+	.methodology-section,
+	.realisations-section {
+		margin-bottom: 4rem;
+	}
+
+	.methodology-section h2,
+	.realisations-section h2 {
+		text-align: center;
+		margin-bottom: 3rem;
+		font-size: clamp(2rem, 4vw, 2.5rem);
+	}
+
+	.methodology-grid,
+	.realisations-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+	}
+
+	.methodology-card,
+	.realisation-card {
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+		min-height: 140px;
+		padding: 1.5rem;
+	}
+
+	.methodology-icon,
+	.realisation-icon {
+		width: 56px;
+		height: 56px;
+		border-radius: 16px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: hsl(var(--primary) / 0.1);
+		border: 1px solid hsl(var(--primary) / 0.2);
+		flex-shrink: 0;
+	}
+
+	.methodology-icon i,
+	.realisation-icon i {
+		width: 28px;
+		height: 28px;
+		color: hsl(var(--primary));
+	}
+
+	.methodology-content,
+	.realisation-content {
+		flex: 1;
+	}
+
+	.methodology-title,
+	.realisation-title {
+		font-size: 1.125rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		color: hsl(var(--foreground));
+	}
+
+	.methodology-description,
+	.realisation-description {
+		font-size: 0.875rem;
+		color: hsl(var(--foreground) / 0.7);
+		line-height: 1.5;
+		margin-bottom: 1rem;
+	}
+
+	.realisation-link {
+		margin-top: auto;
+	}
+
+	.project-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: hsl(var(--primary));
+		text-decoration: none;
+		font-size: 0.875rem;
+		font-weight: 500;
+		transition: all 0.3s ease;
+	}
+
+	.project-link:hover {
+		gap: 0.75rem;
+	}
+
+	.project-link i {
+		width: 14px;
+		height: 14px;
+	}
+
+	.project-na {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: hsl(var(--foreground) / 0.5);
+		font-size: 0.875rem;
+	}
+
+	.project-na i {
+		width: 14px;
+		height: 14px;
+	}
+
+	.competences-section {
+		margin-bottom: 3rem;
+	}
+
+	.competences-card {
+		text-align: center;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.competences-title {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin-bottom: 1.5rem;
+		color: hsl(var(--foreground));
+	}
+
+	.competences-badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		justify-content: center;
+	}
+
+	.competence-badge {
+		padding: 0.5rem 1rem;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		border-radius: 1.5rem;
+		font-size: 0.875rem;
+		color: hsl(var(--foreground) / 0.8);
+		font-weight: 500;
+	}
+
+	.tech-section {
+		display: flex;
+		justify-content: center;
+	}
+
+	.tech-card {
+		text-align: center;
+		max-width: 600px;
+		width: 100%;
+	}
+
+	.tech-title {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin-bottom: 1.5rem;
+		color: hsl(var(--foreground));
+	}
+
+	.tech-badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		justify-content: center;
+	}
+
+	.tech-badge {
+		padding: 0.5rem 1rem;
+		background: var(--gradient-primary);
+		color: white;
+		border-radius: 1.5rem;
+		font-size: 0.875rem;
+		font-weight: 500;
+		box-shadow: 0 4px 12px hsl(var(--primary) / 0.2);
+	}
+
+	@media (max-width: 768px) {
+		.methodology-grid,
+		.realisations-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.methodology-card,
+		.realisation-card {
+			flex-direction: column;
+			text-align: center;
+			min-height: auto;
+		}
+
+		.methodology-icon,
+		.realisation-icon {
+			margin: 0 auto 1rem;
+		}
+	}
+</style>
