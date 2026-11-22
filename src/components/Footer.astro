@@ -1,27 +1,28 @@
 ---
 const navigationLinks = [
-	{ name: "Accueil", href: "/" },
-	{ name: "Expertises", href: "#expertise-themes" },
-	{ name: "Réalisations", href: "#portfolio-structure" }
+	{ name: "Home", href: "/" },
+	{ name: "Expertise", href: "#expertise-themes" },
+	{ name: "Projects", href: "#portfolio-structure" },
+	{ name: "Blog", href: "/blog" }
 ];
 
 const expertiseLinks = [
-	{ name: "Infrastructure & Systèmes", href: "#infrastructure-systemes" },
-	{ name: "Déploiement & Automatisation", href: "#deploiement-automatisation" },
-	{ name: "Hébergement & Applications", href: "#hebergement-applications" },
-	{ name: "Support & Maintenance", href: "#support-maintenance" },
-	{ name: "Automatisation & Workflows", href: "#automatisation-workflows" },
-	{ name: "Conseils & Accompagnement", href: "#conseils-accompagnement" }
+	{ name: "Privacy-First AI (Local RAG)", href: "#privacy-first-ai" },
+	{ name: "AI-Powered Automation (n8n)", href: "#ai-automation" },
+	{ name: "Secure Infrastructure & DevSecOps", href: "#secure-infrastructure" },
+	{ name: "Cloud & On-Premise Deployment", href: "#deployment" },
+	{ name: "Consulting & Support", href: "#consulting" }
 ];
-
 
 const socialLinks = [
 	{ name: "GitHub", href: "https://github.com/rafterkode", icon: "github" },
 	{ name: "LinkedIn", href: "https://linkedin.com/in/rafterkode", icon: "linkedin" },
-	{ name: "Email", href: "mailto:221765147+rafterkode@users.noreply.github.com?subject=Contact%20depuis%20rafterkode.github.io&body=Bonjour,%0D%0A%0D%0AJe%20vous%20contacte%20depuis%20votre%20portfolio%20technique%20rafterkode.github.io%0D%0A%0D%0A", icon: "mail" }
+	{ name: "dev.to", href: "https://dev.to/rafterkode", icon: "book-open" },
+	{ name: "Gumroad", href: "LIEN_GUMROAD", icon: "shopping-bag" },
+	{ name: "Email", href: "mailto:221765147+rafterkode@users.noreply.github.com?subject=Contact%20from%20rafterkode.github.io&body=Hello,%0D%0A%0D%0AI%27m%20reaching%20out%20from%20your%20portfolio%20rafterkode.github.io%0D%0A%0D%0A", icon: "mail" }
 ];
 
-const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"];
+const technologies = ["Python", "Ollama", "ChromaDB", "n8n", "FastAPI", "Astro", "Docker"];
 ---
 
 <footer class="footer">
@@ -34,9 +35,8 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 					<a href="https://rafterkode.github.io" class="brand-name gradient-text">RafterKode</a>
 				</div>
 				<p class="brand-description">
-					 Ingénieur Systèmes & SysOps spécialisé dans la gestion d'infrastructures et d'applications en environnement Cloud et On-Premise. J'accompagne les PME et startups pour stabiliser, sécuriser et automatiser leurs environnements serveurs et applicatifs.
-
-					</p>
+					AI Infrastructure Engineer. I design and deploy AI systems that respect your data — local RAG pipelines for sensitive documents, n8n-powered automation with cloud LLMs, and the secure infrastructure to run both.
+				</p>
 				<div class="brand-technologies">
 					{technologies.map((tech) => (
 						<span class="tech-badge">{tech}</span>
@@ -58,7 +58,7 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 				</div>
 
 				<div class="links-column">
-					<h3 class="links-title">Expertises</h3>
+					<h3 class="links-title">Expertise</h3>
 					<ul class="links-list">
 						{expertiseLinks.map((link) => (
 							<li>
@@ -71,7 +71,7 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 
 			<!-- Social Links -->
 			<div class="footer-social">
-				<h3 class="social-title">Suivez-nous</h3>
+				<h3 class="social-title">Connect</h3>
 				<div class="social-links">
 					{socialLinks.map((social) => (
 						<a href={social.href} class="social-link" title={social.name} target="_blank" rel="noopener">
@@ -87,9 +87,7 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 			<div class="footer-divider"></div>
 			<div class="footer-copyright">
 				<p>
-					© 2024 RafterKode - Explorateur tech et d'idees. Fait avec 
-					<i data-lucide="heart" class="heart-icon"></i> 
-					pour partager la passion technique.
+					© 2026 RafterKode — Building AI systems that respect your data.
 				</p>
 			</div>
 		</div>
@@ -196,6 +194,7 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 	.social-links {
 		display: flex;
 		gap: 1rem;
+		flex-wrap: wrap;
 	}
 
 	.social-link {
@@ -238,30 +237,6 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 		line-height: 1.6;
 	}
 
-	.github-link {
-		color: hsl(var(--primary));
-		text-decoration: none;
-		font-weight: 500;
-		transition: color 0.3s ease;
-	}
-
-	.github-link:hover {
-		color: hsl(var(--primary) / 0.8);
-		text-decoration: underline;
-	}
-
-	.pro-link {
-		color: hsl(var(--primary));
-		text-decoration: none;
-		font-weight: 500;
-		transition: color 0.3s ease;
-	}
-
-	.pro-link:hover {
-		color: hsl(var(--primary) / 0.8);
-		text-decoration: underline;
-	}
-
 	@media (max-width: 768px) {
 		.footer-content {
 			grid-template-columns: 1fr;
@@ -273,3 +248,4 @@ const technologies = ["Astro", "GitHub Pages", "TypeScript", "Responsive Design"
 			gap: 2rem;
 		}
 	}
+</style>   
