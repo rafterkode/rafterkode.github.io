@@ -1,0 +1,153 @@
+---
+const navLinks = [
+	{ name: "Home", href: "/" },
+	{ name: "Expertise", href: "/#expertise-themes" },
+	{ name: "Projects", href: "/#portfolio-structure" },
+	{ name: "Blog", href: "/blog" }
+];
+---
+
+<nav class="navbar">
+	<div class="container navbar-inner">
+		<a href="/" class="navbar-logo">
+			<i data-lucide="code-2"></i>
+			<span class="gradient-text">RafterKode</span>
+		</a>
+
+		<button class="navbar-toggle" aria-label="Toggle menu">
+			<i data-lucide="menu"></i>
+		</button>
+
+		<div class="navbar-links">
+			{navLinks.map((link) => (
+				<a href={link.href} class="navbar-link">{link.name}</a>
+			))}
+			<a href="https://github.com/rafterkode" class="navbar-cta" target="_blank" rel="noopener">
+				<i data-lucide="github"></i>
+				GitHub
+			</a>
+		</div>
+	</div>
+</nav>
+
+<style>
+	.navbar {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background: hsl(var(--background) / 0.9);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid hsl(var(--border));
+		padding: 0.75rem 0;
+	}
+
+	.navbar-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.navbar-logo {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		text-decoration: none;
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: hsl(var(--foreground));
+	}
+
+	.navbar-logo i {
+		width: 24px;
+		height: 24px;
+		color: hsl(var(--primary));
+	}
+
+	.navbar-links {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.navbar-link {
+		color: hsl(var(--foreground) / 0.8);
+		text-decoration: none;
+		font-size: 0.9rem;
+		font-weight: 500;
+		transition: color 0.3s ease;
+	}
+
+	.navbar-link:hover {
+		color: hsl(var(--primary));
+	}
+
+	.navbar-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		padding: 0.4rem 1rem;
+		background: hsl(var(--muted));
+		border: 1px solid hsl(var(--border));
+		border-radius: 0.5rem;
+		color: hsl(var(--foreground));
+		text-decoration: none;
+		font-size: 0.85rem;
+		font-weight: 500;
+		transition: all 0.3s ease;
+	}
+
+	.navbar-cta:hover {
+		border-color: hsl(var(--primary));
+		color: hsl(var(--primary));
+	}
+
+	.navbar-cta i {
+		width: 16px;
+		height: 16px;
+	}
+
+	.navbar-toggle {
+		display: none;
+		background: none;
+		border: none;
+		color: hsl(var(--foreground));
+		cursor: pointer;
+	}
+
+	.navbar-toggle i {
+		width: 24px;
+		height: 24px;
+	}
+
+	@media (max-width: 768px) {
+		.navbar-toggle {
+			display: block;
+		}
+
+		.navbar-links {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			right: 0;
+			flex-direction: column;
+			background: hsl(var(--background));
+			border-bottom: 1px solid hsl(var(--border));
+			padding: 1rem 2rem;
+			gap: 1rem;
+		}
+
+		.navbar-links.open {
+			display: flex;
+		}
+	}
+</style>
+
+<script>
+	const toggle = document.querySelector('.navbar-toggle');
+	const links = document.querySelector('.navbar-links');
+
+	toggle?.addEventListener('click', () => {
+		links?.classList.toggle('open');
+	});
+</script>   
