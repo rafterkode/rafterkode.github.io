@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Footer from '../components/Footer.astro';
 
 const articles = [
 	{
@@ -68,6 +67,11 @@ const categories = ["All", "AI", "Automation", "DevSecOps", "WordPress", "SaaS"]
 >
 	<main class="blog-page">
 		<div class="container">
+			<a href="/" class="back-link">
+				<i data-lucide="arrow-left"></i>
+				Back to Home
+			</a>
+
 			<header class="blog-header">
 				<h1 class="blog-title gradient-text">Technical Articles</h1>
 				<p class="blog-description">
@@ -118,14 +122,33 @@ const categories = ["All", "AI", "Automation", "DevSecOps", "WordPress", "SaaS"]
 			</div>
 		</div>
 	</main>
-
-	<Footer />
 </Layout>
 
 <style>
 	.blog-page {
 		padding: 2rem 0 4rem;
 		min-height: 100vh;
+	}
+
+	.back-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		color: hsl(var(--foreground) / 0.7);
+		text-decoration: none;
+		font-size: 0.9rem;
+		font-weight: 500;
+		margin-bottom: 2rem;
+		transition: color 0.3s ease;
+	}
+
+	.back-link:hover {
+		color: hsl(var(--primary));
+	}
+
+	.back-link i {
+		width: 16px;
+		height: 16px;
 	}
 
 	.blog-header {
